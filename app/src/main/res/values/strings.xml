@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Shifumi</string>
+    <string name="title">Shifumi!</string>
+    <string name="btn_creer" >Créer une partie</string>
+    <string name="btn_rejoindre">Rejoindre une partie</string>
+    <string name="btn_quitter">Quitter</string>
 </resources>
