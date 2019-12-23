@@ -1,23 +1,31 @@
-package m2.devmobile.shifumi;
+package m2.devmobile.shifumi.ecouteurs.wifi;
 
 import android.net.wifi.p2p.WifiP2pDevice;
 import android.net.wifi.p2p.WifiP2pDeviceList;
 import android.net.wifi.p2p.WifiP2pManager;
-import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+
+import m2.devmobile.shifumi.WifiClientActivity;
 
 public class MonPeerListener implements WifiP2pManager.PeerListListener {
 
-    ClientActivity activity;
+    WifiClientActivity activity;
 
-    public MonPeerListener(ClientActivity activity) {
+    public MonPeerListener(WifiClientActivity activity) {
         this.activity = activity;
     }
+
+    @Override
+    public void onPeersAvailable(WifiP2pDeviceList peers) {
+
+        activity.devicesList = new ArrayList<>(peers.getDeviceList());
+        activity.devicesNames = filtreNoms(activity.devicesList);
+
+        activity.updateDevicesList();
+    }
+
 
     /** Sert à récupérer la liste des noms des appareils à proximité  */
     private static String[] filtreNoms(List<WifiP2pDevice> listeAppareilsAProximite) {
@@ -28,18 +36,5 @@ public class MonPeerListener implements WifiP2pManager.PeerListListener {
             t[++i] = d.deviceName;
 
         return t;
-    }
-
-
-    @Override
-    public void onPeersAvailable(WifiP2pDeviceList peers) {
-
-        List devicesList = new ArrayList();
-        devicesList.addAll(peers.getDeviceList());
-
-        this.activity.devicesList = devicesList;
-        this.activity.devicesNames = filtreNoms(devicesList);
-
-        this.activity.updateDevicesList();
     }
 }

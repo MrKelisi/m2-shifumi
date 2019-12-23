@@ -24,23 +24,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ServeurActivity">
+        <activity android:name=".WifiServeurActivity">
             <intent-filter>
                 <action android:name="m2.devmobile.shifumi.serveuractivity" />
 
                 <category android:name="android.intent.category.DEFAULT" /> <!-- obligatoire -->
             </intent-filter>
         </activity>
-        <activity android:name=".ClientActivity">
+        <activity android:name=".WifiClientActivity">
             <intent-filter>
                 <action android:name="m2.devmobile.shifumi.clientactivity" />
 
                 <category android:name="android.intent.category.DEFAULT" /> <!-- obligatoire -->
             </intent-filter>
         </activity>
-        <activity android:name=".JeuActivity">
+        <activity android:name=".JeuServeurActivity">
             <intent-filter>
-                <action android:name="m2.devmobile.shifumi.jeuactivity" />
+                <action android:name="m2.devmobile.shifumi.jeuserveuractivity" />
+
+                <category android:name="android.intent.category.DEFAULT" /> <!-- obligatoire -->
+            </intent-filter>
+        </activity>
+        <activity android:name=".JeuClientActivity">
+            <intent-filter>
+                <action android:name="m2.devmobile.shifumi.jeuclientactivity" />
 
                 <category android:name="android.intent.category.DEFAULT" /> <!-- obligatoire -->
             </intent-filter>

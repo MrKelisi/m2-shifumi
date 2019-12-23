@@ -5,23 +5,26 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imgWifi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="20dp"
+        android:contentDescription="@string/desc_wifi_icon"
+        android:tint="@color/colorPrimary"
         app:srcCompat="@drawable/ic_wifi_tethering_black_24dp" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/labelRechercheServeur"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="Recherche d'un serveur..."
+        android:text="@string/label_recherche_serveur"
+        android:textColor="@color/colorPrimary"
         android:textSize="24sp" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/labelSelectionner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -32,34 +35,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:background="#F0F0F0"
-        android:visibility="visible">
+        android:layout_marginBottom="30dp"
+        android:background="#F0F0F0">
 
     </ListView>
 
     <LinearLayout
         android:id="@+id/connexionConfirmed"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="invisible">
+        android:visibility="gone">
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/labelConnEtablie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="Connexion établie !"
+            android:text="@string/label_conn_etablie"
             android:textColor="#2196F3" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/labelServeurIP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:gravity="center_horizontal"
-            android:text="L'adresse IP du serveur est :" />
+            android:text="@string/label_serveur_IP" />
 
         <TextView
             android:id="@+id/labelAdresse"
@@ -69,4 +71,11 @@
             android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnAnnuler"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/btn_annuler" />
 </LinearLayout>

@@ -17,24 +17,34 @@
         android:layout_marginBottom="20dp"
         android:gravity="center_horizontal"
         android:text="@string/title"
+        android:textColor="@color/colorPrimary"
         android:textSize="30sp" />
 
     <Button
         android:id="@+id/btnCreer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
         android:text="@string/btn_creer" />
 
     <Button
         android:id="@+id/btnRejoindre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
         android:text="@string/btn_rejoindre" />
 
     <Button
         android:id="@+id/btnQuitter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
         android:text="@string/btn_quitter" />
 
 </LinearLayout>
