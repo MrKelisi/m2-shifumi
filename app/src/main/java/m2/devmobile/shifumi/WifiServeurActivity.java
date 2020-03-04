@@ -6,13 +6,12 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import m2.devmobile.shifumi.ecouteurs.bouton.EcouteurBoutonAnnuler;
-import m2.devmobile.shifumi.ecouteurs.bouton.EcouteurBoutonCommencer;
 import m2.devmobile.shifumi.ecouteurs.wifi.EcouteurConnectionChanged;
 import m2.devmobile.shifumi.ecouteurs.wifi.EcouteurInfoConnection;
 
 public class WifiServeurActivity extends WifiActivity {
 
-    Button btnAnnuler, btnCommencer;
+    Button btnAnnuler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +25,6 @@ public class WifiServeurActivity extends WifiActivity {
 
         btnAnnuler = findViewById(R.id.btnAnnuler);
         btnAnnuler.setOnClickListener(new EcouteurBoutonAnnuler(this));
-
-        // btnCommencer = findViewById(R.id.btnCommencer);
-        // btnCommencer.setOnClickListener(new EcouteurBoutonCommencer(this));
     }
 
     @Override

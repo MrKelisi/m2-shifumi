@@ -6,7 +6,7 @@ import android.view.View;
 
 import java.net.UnknownHostException;
 
-import m2.devmobile.shifumi.ecouteurs.thread.ServeurShifumi;
+import m2.devmobile.shifumi.thread.ServeurShifumi;
 
 public class JeuServeurActivity extends JeuActivity {
 
@@ -31,24 +31,21 @@ public class JeuServeurActivity extends JeuActivity {
         btnPierre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                monChoix.setText("J'ai choisi pierre !");
-                activationBoutons(false);
+                cliquer(-1);
             }
         });
 
         btnFeuille.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                monChoix.setText("J'ai choisi feuille !");
-                activationBoutons(false);
+                cliquer(0);
             }
         });
 
         btnCiseaux.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                monChoix.setText("J'ai choisi ciseaux !");
-                activationBoutons(false);
+                cliquer(1);
             }
         });
     }

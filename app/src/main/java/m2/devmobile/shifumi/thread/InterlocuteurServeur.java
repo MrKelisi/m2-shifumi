@@ -1,4 +1,4 @@
-package m2.devmobile.shifumi.ecouteurs.thread;
+package m2.devmobile.shifumi.thread;
 
 import android.util.Log;
 
@@ -16,15 +16,20 @@ import m2.devmobile.shifumi.JeuActivity;
  */
 public class InterlocuteurServeur extends Thread {
 
-    InetAddress adresseServeur;
-    JeuActivity activity;
+    public static final String TAG = "InterlocuteurServeur";
 
-    BufferedReader fluxEntrant;
-    public PrintStream fluxSortant;
+    private JeuActivity activity;
+    private InetAddress adresseServeur;
+    private BufferedReader fluxEntrant;
+    private PrintStream fluxSortant;
 
     public InterlocuteurServeur(JeuActivity activity) throws UnknownHostException {
         this.activity = activity;
         this.adresseServeur = InetAddress.getByName(activity.adresseServeur);
+    }
+
+    public void envoyer(String ligne) {
+        fluxSortant.println(ligne);
     }
 
     @Override
@@ -35,32 +40,32 @@ public class InterlocuteurServeur extends Thread {
             this.fluxEntrant = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.fluxSortant = new PrintStream(socket.getOutputStream());
 
-            Log.e("CLIENT", "Le client est prêt");
+            Log.e(TAG, "Le client est prêt");
 
             while(!isInterrupted()) {
                 String reponse = this.fluxEntrant.readLine();
-                Log.e("CLIENT", "Réponse du serveur : " + reponse);
+                Log.e(TAG, String.format("Message de serveur : %s", reponse));
 
                 switch (reponse) {
-                    case "ok":
+                    case "choix_serveur":
+                        activity.sonChoix = Integer.parseInt(fluxEntrant.readLine());
+                        activity.resultat.setText("");
                         break;
-                    case "i_chose_rock":
-                        activity.sonChoix.setText("L'autre a choisi pierre !");
+                    case "reveler":
+                        activity.reveler();
                         break;
-                    case "i_chose_paper":
-                        activity.sonChoix.setText("L'autre a choisi feuille !");
-                        break;
-                    case "i_chose_scissors":
-                        activity.sonChoix.setText("L'autre a choisi ciseaux !");
+                    case "rejouer":
+                        activity.rejouer();
                         break;
                 }
             }
 
-            Log.e("CLIENT", "Le client s'est arrêté");
-            //socket.close();
+            Log.e(TAG, "Le client s'est arrêté");
+            socket.close();
 
         } catch(Exception e) {
-            Log.e("CLIENT", String.format("Le client s'est arrêté à cause d'une erreur :\n%s", e.toString()));
+            Log.e(TAG, "Le client s'est arrêté à cause d'une erreur :");
+            e.printStackTrace();
             activity.finish();
         }
     }

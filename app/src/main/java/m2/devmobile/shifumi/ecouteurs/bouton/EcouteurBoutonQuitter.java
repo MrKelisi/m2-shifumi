@@ -6,7 +6,7 @@ import m2.devmobile.shifumi.MainActivity;
 
 public class EcouteurBoutonQuitter implements View.OnClickListener {
 
-    MainActivity activity;
+    private MainActivity activity;
 
     public EcouteurBoutonQuitter(MainActivity activity) {
         this.activity = activity;

@@ -17,11 +17,10 @@ public class EcouteurPeersChanged extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        String action = intent.getAction();
 
-        // Le système a détecté un nouvel appareil connecté en wifi p2p à proximité,
-        // réponse à discoverPeers() : seulement côté client
-        if(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION.equals(action)) {
+        // Le système a détecté un nouvel appareil : réponse à discoverPeers()
+        if(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION.equals(intent.getAction())) {
+
             activity.manager.requestPeers(activity.channel, activity.monPeerListener);
         }
     }

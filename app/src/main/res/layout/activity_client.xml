@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="Veuillez sélectionner un serveur \ndans la liste ci-dessous :" />
+        android:text="@string/label_selectionner" />
 
     <ListView
         android:id="@+id/devices"
@@ -40,42 +40,10 @@
 
     </ListView>
 
-    <LinearLayout
-        android:id="@+id/connexionConfirmed"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <TextView
-            android:id="@+id/labelConnEtablie"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/label_conn_etablie"
-            android:textColor="#2196F3" />
-
-        <TextView
-            android:id="@+id/labelServeurIP"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center_horizontal"
-            android:text="@string/label_serveur_IP" />
-
-        <TextView
-            android:id="@+id/labelAdresse"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
     <Button
         android:id="@+id/btnAnnuler"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="@string/btn_annuler" />
+        android:text="@string/btn_retour" />
 </LinearLayout>

@@ -8,7 +8,7 @@ import android.view.View;
 
 import java.net.UnknownHostException;
 
-import m2.devmobile.shifumi.ecouteurs.thread.InterlocuteurServeur;
+import m2.devmobile.shifumi.thread.InterlocuteurServeur;
 
 public class JeuClientActivity extends JeuActivity {
 
@@ -16,7 +16,7 @@ public class JeuClientActivity extends JeuActivity {
     InterlocuteurServeur interlocuteur;
 
     public JeuClientActivity() {
-        // TODO: PAS BIEN !!! Trouver une alternative
+        //TODO: voir si une alternative existe
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitAll().build());
     }
 
@@ -26,14 +26,13 @@ public class JeuClientActivity extends JeuActivity {
         try {
             interlocuteur = new InterlocuteurServeur(this);
 
-            // Attendre 1s que le serveur soit prêt
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
+            // Attendre que le serveur soit prêt
+            new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     interlocuteur.start();
                 }
-            }, 1000);
+            }, 100);
 
         } catch (UnknownHostException e) {
             Log.e(JeuClientActivity.TAG, "Le démarrage du client a échoué");
@@ -45,30 +44,27 @@ public class JeuClientActivity extends JeuActivity {
         btnPierre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                monChoix.setText("J'ai choisi pierre !");
-                interlocuteur.fluxSortant.println("i_chose_rock");
-                interlocuteur.fluxSortant.println("what_did_you_choose");
-                activationBoutons(false);
+                cliquer(-1);
+                interlocuteur.envoyer("choix_client");
+                interlocuteur.envoyer(String.valueOf(monChoix));
             }
         });
 
         btnFeuille.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                monChoix.setText("J'ai choisi feuille !");
-                interlocuteur.fluxSortant.println("i_chose_paper");
-                interlocuteur.fluxSortant.println("what_did_you_choose");
-                activationBoutons(false);
+                cliquer(0);
+                interlocuteur.envoyer("choix_client");
+                interlocuteur.envoyer(String.valueOf(monChoix));
             }
         });
 
         btnCiseaux.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                monChoix.setText("J'ai choisi ciseaux !");
-                interlocuteur.fluxSortant.println("i_chose_scissors");
-                interlocuteur.fluxSortant.println("what_did_you_choose");
-                activationBoutons(false);
+                cliquer(1);
+                interlocuteur.envoyer("choix_client");
+                interlocuteur.envoyer(String.valueOf(monChoix));
             }
         });
 

@@ -7,7 +7,7 @@ import m2.devmobile.shifumi.MainActivity;
 
 public class EcouteurBoutonRejoindre implements View.OnClickListener {
 
-    MainActivity activity;
+    private MainActivity activity;
 
     public EcouteurBoutonRejoindre(MainActivity activity) {
         this.activity = activity;

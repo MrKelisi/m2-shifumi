@@ -18,10 +18,9 @@ public class EcouteurConnectionChanged extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        String action = intent.getAction();
 
         // La composition du réseau local a changé
-        if (WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION.equals(action)) {
+        if (WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION.equals(intent.getAction())) {
 
             NetworkInfo networkInfo = intent.getParcelableExtra(WifiP2pManager.EXTRA_NETWORK_INFO);
             if (networkInfo.isConnected()) {

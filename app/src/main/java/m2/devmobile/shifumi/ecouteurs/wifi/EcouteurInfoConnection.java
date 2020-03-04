@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import m2.devmobile.shifumi.R;
 import m2.devmobile.shifumi.WifiActivity;
+import m2.devmobile.shifumi.WifiServeurActivity;
 
 public class EcouteurInfoConnection implements WifiP2pManager.ConnectionInfoListener {
 
@@ -19,10 +20,9 @@ public class EcouteurInfoConnection implements WifiP2pManager.ConnectionInfoList
     @Override
     public void onConnectionInfoAvailable(WifiP2pInfo info) {
         boolean firstConnection = (activity.adresseServeur == null);
-        activity.adresseServeur = info.groupOwnerAddress;  // l'adresse IP du serveur (= Group Owner) est enfin connue
 
-        TextView title = activity.findViewById(R.id.labelAdresse);
-        title.setText(activity.adresseServeur.getHostAddress());
+        // L'adresse IP du serveur (= Group Owner) est enfin connue
+        activity.adresseServeur = info.groupOwnerAddress;
 
         if (info.groupFormed) {
 
@@ -33,8 +33,6 @@ public class EcouteurInfoConnection implements WifiP2pManager.ConnectionInfoList
                 jeuIntent.setAction("m2.devmobile.shifumi.jeuclientactivity");
                 jeuIntent.putExtra("ADDR_SERV", activity.adresseServeur.getHostAddress());
                 activity.startActivityForResult(jeuIntent, 333);
-
-                //activity.findViewById(R.id.connexionConfirmed).setVisibility(View.VISIBLE);
             }
 
             // Lancement de l'activité JeuServeurActivity (un client s'est connecté)
@@ -44,11 +42,11 @@ public class EcouteurInfoConnection implements WifiP2pManager.ConnectionInfoList
                 jeuIntent.setAction("m2.devmobile.shifumi.jeuserveuractivity");
                 jeuIntent.putExtra("ADDR_SERV", activity.adresseServeur.getHostAddress());
                 activity.startActivityForResult(jeuIntent, 444);
-
-                //activity.findViewById(R.id.connexionConfirmed).setVisibility(View.VISIBLE);
             }
         }
 
+        if(activity instanceof WifiServeurActivity) {
+            ((TextView) activity.findViewById(R.id.labelAdresse)).setText(activity.adresseServeur.getHostAddress());
+        }
     }
-
 }

@@ -1,4 +1,4 @@
-package m2.devmobile.shifumi.ecouteurs.thread;
+package m2.devmobile.shifumi.thread;
 
 import android.util.Log;
 
@@ -11,16 +11,17 @@ import java.net.UnknownHostException;
 import m2.devmobile.shifumi.JeuActivity;
 
 /**
- * Classe utilisée par le SERVEUR pour rediriger les requêtes faitent par les clients via les
- * sockets vers des interlocuteurs qui leur répondront.
+ * Classe utilisée par le SERVEUR pour rediriger les requêtes faitent par les clients
+ * vers des InterlocuteurClient qui se chargeront de leur répondre.
  */
 public class ServeurShifumi extends Thread {
 
-    ServerSocket serverSocket;
+    public static final String TAG = "ServeurShifumi";
 
-    JeuActivity activity;
-    InetAddress adresse;
-    int port;
+    private JeuActivity activity;
+    private InetAddress adresse;
+    private int port;
+    private int numClient = 0;
 
     public ServeurShifumi(JeuActivity activity, String adresse, int port) throws UnknownHostException {
         this.activity = activity;
@@ -33,27 +34,25 @@ public class ServeurShifumi extends Thread {
         super.run();
 
         try {
-            serverSocket = new ServerSocket();
+            ServerSocket serverSocket = new ServerSocket();
             serverSocket.bind(new InetSocketAddress(adresse, port));
-
-            Log.e("SERVEUR", "Le serveur est prêt");
-            int numClient = 0;
+            Log.e(TAG, "Le serveur est prêt");
 
             while(!isInterrupted()) {
-                Log.e("SERVEUR", "Attente du prochain client...");
+                Log.e(TAG, "Attente du prochain client...");
 
                 Socket client = serverSocket.accept();
-                numClient++;
-                Log.e("SERVEUR", String.format("Client %d connecté !", numClient));
+                Log.e(TAG, String.format("Client %d connecté !", ++numClient));
 
                 InterlocuteurClient interlocuteur = new InterlocuteurClient(activity, client, numClient);
                 interlocuteur.start();
             }
 
-            Log.e("SERVEUR", "Le serveur s'est arrêté");
+            Log.e(TAG, "Le serveur s'est arrêté");
 
         } catch (Exception e) {
-            Log.e("SERVEUR", String.format("Le serveur s'est arrêté à cause d'une erreur : \n%s", e.toString()));
+            Log.e(TAG, "Le serveur s'est arrêté à cause d'une erreur :");
+            e.printStackTrace();
             activity.finish();
         }
     }
